@@ -5,7 +5,7 @@ class Pile extends Deck {
     //caso 5 seja a primeira carta, prevenir reflexao
     public top(): Card {
         const top = this.deck[this.deck.length - 1];
-        return top?.value !== '5' ? top : this.deck[this.deck.length - 2];
+        return top?.value !== '5' || !this.deck[this.deck.length - 2] ? top : this.deck[this.deck.length - 2];
     }
 
     public addCard(card: Card) {
@@ -26,7 +26,7 @@ class Pile extends Deck {
                 case 'Q':
                 case 'K':
                 case 'A':
-                    if ((this.top()?.value === '7' && Deck.priority(card) <= Deck.priority(this.top())) || Deck.priority(card) >= Deck.priority(this.top())) {
+                    if ((this.top()?.value === '7' && Deck.priority(card)! <= Deck.priority(this.top())!) || Deck.priority(card)! >= Deck.priority(this.top())!) {
                         this.deck.push(card);
                     } else {
                         return null;

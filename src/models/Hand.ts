@@ -25,7 +25,9 @@ export default class Hand {
         }
 
         take(cards : Card[]){
-            this.current = [...this.current, ...cards];
+            if(cards){
+                this.current = [...this.current, ...cards];
+            }
         }
 
 }
