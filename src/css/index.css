@@ -6,16 +6,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   display: flex;
-  flex: 1;
-  align-items: center;
   background-color: #2b2e4a !important;
+  min-height: 100vh;
 }
 
 * {
   color: #f8f5f1;
 }
 
+input {
+  color: #101010;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
