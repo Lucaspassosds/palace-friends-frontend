@@ -31,7 +31,7 @@ export default class Game {
         this.currentPlayer = 0;
         this.gameDeck.createDeck();
         this.gameDeck.shuffle();
-        this.players = Array<Hand>(gamemode).map(() =>{
+        this.players = _.range(gamemode).map(() =>{
             const playerCards : Card[] = [];
 
             //loop 9 vezes

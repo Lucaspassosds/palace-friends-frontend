@@ -30,4 +30,8 @@ export default class Hand {
             }
         }
 
+        getDeck(){
+            return [...this.down, ...this.up, ...this.current];
+        }
+
 }
