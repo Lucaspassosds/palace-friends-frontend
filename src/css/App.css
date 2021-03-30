@@ -16,3 +16,38 @@
 .input-box * {
   margin: 0.5rem;
 }
+
+.game-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+#game-table{
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  height: 65vh;
+  border: 0.2rem solid;
+  border-color: #393939;
+  border-radius: 1rem;
+  background-image: url('../assets/img/table-bg.jpg');
+  position: relative;
+}
+
+#pile{
+  align-self: center;
+}
+
+.player-card{
+  height: 7.5vh;
+  transition: 1s;
+}
+
+.play-btn{
+  width: 15vh;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
