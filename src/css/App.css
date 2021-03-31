@@ -37,7 +37,10 @@
 }
 
 #pile{
+  display: flex;
+  flex-direction: row;
   align-self: center;
+  position: relative;
 }
 
 .player-card{
