@@ -11,7 +11,7 @@ export default class Deck {
     }
 
     public createDeck() {
-        const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
+        const suits = ['heart', 'diamond', 'club', 'spade'];
         const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         for (let suit of suits) {
             for (let value of values) {

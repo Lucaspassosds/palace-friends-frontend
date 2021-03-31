@@ -44,7 +44,7 @@ export default class Game {
         });
     }
 
-    turn(playerIndex : number){
-
+    turn(playerIndex : number, cardIndex : number){
+        this.players[playerIndex].take(this.gamePile.addCard(this.players[playerIndex].play(cardIndex)));
     }
 }
