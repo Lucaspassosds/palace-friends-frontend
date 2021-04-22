@@ -10,9 +10,8 @@ class Pile extends Deck {
     }
 
     public addCard(card: Card) {
-        console.log(this.top());
+        const { value } = card;
         if (this.top()) {
-            const { value } = card;
             switch (value) {
                 case "2":
                 case "5":
@@ -36,18 +35,19 @@ class Pile extends Deck {
                             Deck.priority(card)! >= Deck.priority(this.top())!)
                     ) {
                         this.deck.push(card);
-                    } else {
-                        //return null;
-                        this.deck.push(card);
-                        return this.clear();
+                        return null;
                     }
-                    break;
+                    this.deck.push(card);
+                    return this.clear();
                 case "10":
                     this.clear();
-                    return null;
+                    return 'Clear';
                 default:
                     return null;
             }
+        } else if (value === '10') {
+            this.clear();
+            return 'Clear';
         } else {
             this.deck.push(card);
             return null;

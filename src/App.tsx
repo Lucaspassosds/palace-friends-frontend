@@ -36,7 +36,7 @@ function App() {
             <CreateGame setUserName={setUserName} />
           </Route>
           <Route exact path="/game/:gameid">
-            <PalaceGame myUserName={userName} gamemode={GameMode.TWO_PLAYERS} />
+            <PalaceGame myUserName={userName} gamemode={GameMode.FIVE_PLAYERS} />
           </Route>
         </Switch>
       </Router>

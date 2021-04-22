@@ -18,15 +18,18 @@
 }
 
 .game-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
+  display: grid;
+  grid-template-rows: auto;
+  justify-items: center;
+  gap: 0.25rem;
 }
 
 #game-table{
+  grid-area: game;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 50vw;
   height: 65vh;
   border: 0.2rem solid;
@@ -34,6 +37,11 @@
   border-radius: 1rem;
   background-image: url('../assets/img/table-bg.jpg');
   position: relative;
+}
+
+#game-table h1 {
+  position: absolute;
+  top: 1px;
 }
 
 #pile{
@@ -45,7 +53,12 @@
 
 .player-card{
   height: 7.5vh;
-  transition: 1s;
+  transition: 0.15s;
+}
+.card-selected{
+  border: 1px solid;
+  border-color: yellow;
+  transform: scale(1.1);
 }
 
 .play-btn{

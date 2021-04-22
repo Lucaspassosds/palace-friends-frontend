@@ -46,6 +46,10 @@ export default class Deck {
         return this._deck[this._deck.length - 1];
     }
 
+    public isEmpty(){
+        return this._deck.length === 0;
+    }
+
     public static priority(card: Card) {
         return card ? {
             '2': 0,

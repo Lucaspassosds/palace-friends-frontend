@@ -10,9 +10,15 @@ export enum GameMode {
     FIVE_PLAYERS = 5,
 }
 
-enum GamePhase {
+export enum GamePhase {
     DECK_PHASE,
     PILE_PHASE
+}
+
+export enum GameEvent {
+    PLAY,
+    TAKE,
+    CLEAR
 }
 
 export default class Game {
@@ -22,6 +28,7 @@ export default class Game {
     gamePile: Pile;
     currentPhase: GamePhase;
     currentPlayer: number;
+    currentEvent: GameEvent;
 
     constructor(gamemode: GameMode){
         this.gamemode = gamemode;
@@ -29,6 +36,7 @@ export default class Game {
         this.gamePile = new Pile();
         this.currentPhase = GamePhase.DECK_PHASE;
         this.currentPlayer = 0;
+        this.currentEvent = GameEvent.PLAY;
         this.gameDeck.createDeck();
         this.gameDeck.shuffle();
         this.players = _.range(gamemode).map(() =>{
@@ -44,7 +52,23 @@ export default class Game {
         });
     }
 
+    getPlayerCard(playerIndex : number, cardIndex : number) {
+        return this.players[playerIndex].current[cardIndex];
+    }
+
     turn(playerIndex : number, cardIndex : number){
-        this.players[playerIndex].take(this.gamePile.addCard(this.players[playerIndex].play(cardIndex)));
+        if(playerIndex !== this.currentPlayer){
+            throw new Error('Wrong player! The current player is: Player '+(this.currentPlayer + 1));
+        }
+        const move = this.gamePile.addCard(this.players[playerIndex].play(cardIndex));
+        console.log({move});
+        if(move === null){
+            this.currentEvent = GameEvent.PLAY;
+        } else if(move === 'Clear'){
+            this.currentEvent = GameEvent.CLEAR;
+        } else {
+            this.currentEvent = GameEvent.TAKE;
+            this.players[playerIndex].take(move);
+        }
     }
 }
