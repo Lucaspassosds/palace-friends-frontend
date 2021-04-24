@@ -1,5 +1,5 @@
 //gambiarra ultimate
-export default function requireImage(src: string) {
+export default function requireImage(src: string) : string {
     switch (src) {
         case 'back-olive':
             return require('../assets/img/back-olive.png').default;

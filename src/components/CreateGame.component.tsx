@@ -7,13 +7,16 @@ import "../css/App.css";
 interface GameScreenProps {
     didRedirect(): void;
     setUserName(name: string): void;
+    setGamemode(playersAmount: number): void;
 }
 interface CreateGameProps {
     setUserName(name: string): void;
+    setGamemode(playersAmount: number): void;
 }
 
 const GameScreen: React.FC<GameScreenProps> = (props) => {
     const [didGetUserName, setDidGetUserName] = useState(false);
+    const [selectedGameMode, setSelectedGameMode] = useState(3);
     const [gameId, setGameId] = useState("");
     const [inputName, setInputName] = useState("");
 
@@ -54,6 +57,9 @@ const GameScreen: React.FC<GameScreenProps> = (props) => {
                         }
                     />
 
+                   <input type='range' min={2} max={5} value={selectedGameMode} onChange={e => setSelectedGameMode(Number(e.target.value))} />
+                   <label>Amount of players: {selectedGameMode}</label>
+
                     <button
                         className='btn btn-primary'
                         disabled={!(inputName.length > 0)}
@@ -63,6 +69,7 @@ const GameScreen: React.FC<GameScreenProps> = (props) => {
                             // the uuid we generate here.
                             props.didRedirect();
                             props.setUserName(inputName);
+                            props.setGamemode(selectedGameMode);
                             setDidGetUserName(true);
                             send();
                         }}
@@ -82,7 +89,8 @@ const CreateGame: React.FC<CreateGameProps> = (props) => {
         <GameScreen
             didRedirect={player.playerDidRedirect}
             setUserName={props.setUserName}
-        />
+            setGamemode={props.setGamemode}
+            />
     );
 };
 

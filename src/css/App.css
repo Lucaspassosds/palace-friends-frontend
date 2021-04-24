@@ -39,9 +39,12 @@
   position: relative;
 }
 
-#game-table h1 {
+.game-infos {
   position: absolute;
   top: 1px;
+}
+.game-infos h3 {
+  margin-bottom: 1rem;
 }
 
 #pile{
@@ -66,4 +69,17 @@
   position: absolute;
   bottom: 1rem;
   right: 1rem;
+}
+
+.deck-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.deck-container img {
+  position: absolute;
+}
+.deck-container p{
+  z-index: 99;
 }

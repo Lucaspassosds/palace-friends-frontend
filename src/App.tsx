@@ -19,10 +19,11 @@ function App() {
     setDidRedirect(false)
   }, [])
 
-  const [userName, setUserName] = React.useState('')
+  const [userName, setUserName] = React.useState('');
+  const [gamemode, setGamemode] = React.useState(3);
 
   return (
-    <PlayerContext.Provider value={{ didRedirect: didRedirect, playerDidRedirect: playerDidRedirect, playerDidNotRedirect: playerDidNotRedirect }}>
+    <PlayerContext.Provider value={{ didRedirect, playerDidRedirect, playerDidNotRedirect }}>
       <Router>
         <div className="App">
           <nav className='navbar navbar-expand-lg navbar-dark bg-dark justify-content-center col-md-12'>
@@ -33,10 +34,10 @@ function App() {
         </div>
         <Switch>
           <Route exact path="/">
-            <CreateGame setUserName={setUserName} />
+            <CreateGame setUserName={setUserName} setGamemode={setGamemode} />
           </Route>
           <Route exact path="/game/:gameid">
-            <PalaceGame myUserName={userName} gamemode={GameMode.FIVE_PLAYERS} />
+            <PalaceGame myUserName={userName} gamemode={gamemode} />
           </Route>
         </Switch>
       </Router>

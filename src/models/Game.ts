@@ -57,18 +57,33 @@ export default class Game {
     }
 
     turn(playerIndex : number, cardIndex : number){
+
+        const player = this.players[playerIndex];
+
         if(playerIndex !== this.currentPlayer){
             throw new Error('Wrong player! The current player is: Player '+(this.currentPlayer + 1));
         }
-        const move = this.gamePile.addCard(this.players[playerIndex].play(cardIndex));
+
+        const move = this.gamePile.addCard(player.play(cardIndex));
         console.log({move});
+
         if(move === null){
             this.currentEvent = GameEvent.PLAY;
         } else if(move === 'Clear'){
             this.currentEvent = GameEvent.CLEAR;
         } else {
             this.currentEvent = GameEvent.TAKE;
-            this.players[playerIndex].take(move);
+            player.take(move);
+        }
+
+        if(this.currentPhase === GamePhase.DECK_PHASE && player.current.length < 3){
+            while(player.current.length !== 3 && !this.gameDeck.isEmpty()){
+                player.take([this.gameDeck.deal()!]);
+            }
+        }
+
+        if(this.gameDeck.isEmpty()){
+            this.currentPhase = GamePhase.PILE_PHASE;
         }
     }
 }

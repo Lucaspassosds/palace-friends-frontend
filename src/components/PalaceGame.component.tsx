@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Game, { GameMode, GameEvent } from "../models/Game";
 import { Card } from "../models/Deck";
 import requireImage from "../utils/imageImportHelper";
+import { url } from "node:inspector";
 
 interface PalaceGameProps {
     gamemode: GameMode;
@@ -162,6 +163,13 @@ const PalaceGame: React.FC<PalaceGameProps> = (props) => {
                 game.gamemode;
                 break;
         }
+
+        //Se o player jogou um 8, pula a vez do proximo.
+        if(game.gamePile.top()?.value === '8'){
+            game.currentPlayer =
+                ((++game.currentPlayer % game.gamemode) + game.gamemode) %
+                game.gamemode;
+        }
         
     };
 
@@ -191,7 +199,13 @@ const PalaceGame: React.FC<PalaceGameProps> = (props) => {
         >
             {generatePlayerCards()}
             <div id='game-table'>
-                <h1>Current Player: {(game.currentPlayer + 1)}</h1>
+                <div className='game-infos'>
+                <h3>Current Player: {(game.currentPlayer + 1)}</h3>
+                <div className='deck-container'>
+                    <img src={requireImage('back-olive')} alt="Bug!" className='player-card'/>
+                    <p>{game.gameDeck.deck.length}</p>
+                </div>
+                </div>
                 <div id='pile'>{generatePileCards()}</div>
                 <button
                     className='btn btn-primary play-btn'
