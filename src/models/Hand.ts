@@ -16,7 +16,6 @@ export default class Hand {
         }
 
         play(index : number) : Card{
-            console.log({index});
             if(index >= 0 && index < this.current.length){
                 const [ val ] = this.current.splice(index, 1);
                 return val;

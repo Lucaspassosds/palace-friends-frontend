@@ -1,11 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import './css/App.css';
+import './css/App.scss';
 import { PlayerContext } from './context/context';
 import CreateGame from './components/CreateGame.component';
 import PalaceGame from './components/PalaceGame.component';
-import { GameMode } from './models/Game';
 
 function App() {
 

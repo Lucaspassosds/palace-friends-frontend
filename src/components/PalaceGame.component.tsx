@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Game, { GameMode, GameEvent } from "../models/Game";
-import { Card } from "../models/Deck";
 import requireImage from "../utils/imageImportHelper";
-import { url } from "node:inspector";
 
 interface PalaceGameProps {
     gamemode: GameMode;
@@ -18,7 +16,7 @@ const PalaceGame: React.FC<PalaceGameProps> = (props) => {
     const [game, setGame] = useState(new Game(props.gamemode));
     const [selectedCards, setSelectedCards] = useState<SelectedCardInfo[]>([]);
     //console.log(game);
-    let gridTemplate;
+    let gridTemplate: string;
     switch (props.gamemode) {
         case GameMode.TWO_PLAYERS:
             gridTemplate = `'. player-2 .'
@@ -43,10 +41,14 @@ const PalaceGame: React.FC<PalaceGameProps> = (props) => {
     }
 
     const generatePlayerCards = () => {
-        return game.players.map((player, index) => {
-            return (
-                <div key={index} style={{ gridArea: "player-" + (index + 1) }}>
-                    <h1>Player {index + 1} cards</h1>
+        return game.players.map((player, index) => (
+            <div
+                key={index}
+                className='player-deck'
+                style={{ gridArea: "player-" + (index + 1) }}
+            >
+                <h3>Player {index + 1} cards</h3>
+                <div>
                     {player.current.map((card, cardIndex) => {
                         const bg = requireImage(`${card.suit}_${card.value}`);
 
@@ -63,8 +65,8 @@ const PalaceGame: React.FC<PalaceGameProps> = (props) => {
                         );
                     })}
                 </div>
-            );
-        });
+            </div>
+        ));
     };
 
     const selectCard = (
@@ -74,7 +76,7 @@ const PalaceGame: React.FC<PalaceGameProps> = (props) => {
         event: React.MouseEvent<HTMLImageElement, MouseEvent>
     ) => {
         //if player da vez
-        if(playerIndex !== game.currentPlayer){
+        if (playerIndex !== game.currentPlayer) {
             return;
         }
 
@@ -91,6 +93,7 @@ const PalaceGame: React.FC<PalaceGameProps> = (props) => {
         }
 
         focusSelected(event);
+
         if (selectedCards.some((value) => value.cardIndex === cardIndex)) {
             //caso a carta ja tenha sido selecionada
             //caso a carta ja tenha sido, remover a carta
@@ -151,26 +154,25 @@ const PalaceGame: React.FC<PalaceGameProps> = (props) => {
          * Se o jogador puxou a pilha, a vez passa para o anterior.
          * Caso contrario, a vez passa para o proximo jogador.
          */
-        switch(game.currentEvent){
-            case GameEvent.PLAY: 
-            game.currentPlayer =
-                ((++game.currentPlayer % game.gamemode) + game.gamemode) %
-                game.gamemode;
+        switch (game.currentEvent) {
+            case GameEvent.PLAY:
+                game.currentPlayer =
+                    ((++game.currentPlayer % game.gamemode) + game.gamemode) %
+                    game.gamemode;
                 break;
             case GameEvent.TAKE:
                 game.currentPlayer =
-                ((--game.currentPlayer % game.gamemode) + game.gamemode) %
-                game.gamemode;
+                    ((--game.currentPlayer % game.gamemode) + game.gamemode) %
+                    game.gamemode;
                 break;
         }
 
         //Se o player jogou um 8, pula a vez do proximo.
-        if(game.gamePile.top()?.value === '8'){
+        if (game.gamePile.top()?.value === "8") {
             game.currentPlayer =
                 ((++game.currentPlayer % game.gamemode) + game.gamemode) %
                 game.gamemode;
         }
-        
     };
 
     const generatePileCards = () => {
@@ -200,11 +202,15 @@ const PalaceGame: React.FC<PalaceGameProps> = (props) => {
             {generatePlayerCards()}
             <div id='game-table'>
                 <div className='game-infos'>
-                <h3>Current Player: {(game.currentPlayer + 1)}</h3>
-                <div className='deck-container'>
-                    <img src={requireImage('back-olive')} alt="Bug!" className='player-card'/>
-                    <p>{game.gameDeck.deck.length}</p>
-                </div>
+                    <h3>Current Player: {game.currentPlayer + 1}</h3>
+                    <div className='deck-container'>
+                        <img
+                            src={requireImage("back-olive")}
+                            alt='Bug!'
+                            className='player-card'
+                        />
+                        <p>{game.gameDeck.deck.length}</p>
+                    </div>
                 </div>
                 <div id='pile'>{generatePileCards()}</div>
                 <button

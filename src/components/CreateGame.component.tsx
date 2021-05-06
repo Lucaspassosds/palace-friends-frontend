@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { PlayerContext } from "../context/context";
-import "../css/App.css";
+import "../css/App.scss";
 
 interface GameScreenProps {
     didRedirect(): void;

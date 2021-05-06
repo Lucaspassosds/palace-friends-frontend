@@ -1,0 +1,85 @@
+.App {
+    text-align: center;
+    display: flex;
+    flex: 1;
+    max-height: 7.5vh;
+}
+
+.input-box {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+    align-self: center;
+    text-align: center;
+    * {
+        margin: 0.5rem;
+    }
+}
+
+.game-container {
+    display: grid;
+    grid-template-rows: auto;
+    justify-items: center;
+    gap: 0.25rem;
+}
+
+#game-table {
+    grid-area: game;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50vw;
+    height: 65vh;
+    border: 0.2rem solid;
+    border-color: #393939;
+    border-radius: 1rem;
+    background-image: url("../assets/img/table-bg.jpg");
+    position: relative;
+}
+
+.game-infos {
+    position: absolute;
+    top: 1px;
+    h3 {
+        margin-bottom: 1rem;
+    }
+}
+
+#pile {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    position: relative;
+}
+
+.player-card {
+    height: 7.5vh;
+    transition: 0.15s;
+}
+.card-selected {
+    border: 1px solid;
+    border-color: yellow;
+    transform: scale(1.1);
+}
+
+.play-btn {
+    width: 15vh;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.deck-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    img {
+        position: absolute;
+    }
+    p {
+        z-index: 99;
+    }
+}

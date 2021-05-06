@@ -65,7 +65,6 @@ export default class Game {
         }
 
         const move = this.gamePile.addCard(player.play(cardIndex));
-        console.log({move});
 
         if(move === null){
             this.currentEvent = GameEvent.PLAY;
